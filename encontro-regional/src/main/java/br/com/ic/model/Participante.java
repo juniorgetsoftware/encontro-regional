@@ -12,6 +12,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Type;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +26,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(of = { "id" })
+@Builder
+@AllArgsConstructor
 public class Participante implements Serializable {
 
 	/**
