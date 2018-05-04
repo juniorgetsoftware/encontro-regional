@@ -6,7 +6,7 @@ Funcionalidade: Fazer login no sistema
 
 	Cenário: Login com usuario e senha corretos
 	
-		Dado eu navego para a página de login
+		Dado que eu navego para a página de login
 		E eu digito o usuário admin e a senha admin
 		E eu clico no botão login
-		Então eu sou redirecionado para a página inicial  
+		Entao eu sou redirecionado para a página inicial  
