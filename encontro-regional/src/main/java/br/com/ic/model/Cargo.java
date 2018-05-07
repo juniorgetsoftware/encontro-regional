@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,9 +41,15 @@ public class Cargo implements Serializable {
 
 	@Column(unique = true, nullable = false, length = 50)
 	@NotBlank
+	@Size(min = 3, max = 50)
 	private String nome;
 
 	@Column(length = 250)
+	@Size(max = 250)
 	private String descricao;
+
+	@Type(type = "true_false")
+	@Column(length = 250)
+	private Boolean ativo;
 
 }
