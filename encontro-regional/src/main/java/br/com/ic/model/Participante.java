@@ -1,14 +1,17 @@
 package br.com.ic.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
 
 import org.hibernate.annotations.Type;
 
@@ -45,14 +48,25 @@ public class Participante implements Serializable {
 
 	@NotBlank
 	@ManyToOne(optional = false)
+	@JoinColumn(name = "igreja_id")
 	private Igreja igreja;
 
 	@NotBlank
 	@ManyToOne(optional = false)
+	@JoinColumn(name = "cargo_id")
 	private Cargo cargo;
 
 	@NotBlank
 	@Type(type = "true_false")
 	private boolean primeiraVezEmEncontroRegional;
+
+	@Type(type = "true_false")
+	@Column(nullable = false)
+	private Boolean ativo = true;
+	
+	@Column(nullable = false, name = "data_cadastro")
+	@PastOrPresent
+	@NotBlank
+	private LocalDateTime dataCadastro = LocalDateTime.now();
 
 }

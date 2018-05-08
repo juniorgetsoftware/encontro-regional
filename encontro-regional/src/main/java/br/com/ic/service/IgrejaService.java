@@ -11,7 +11,7 @@ import br.com.ic.model.Cargo;
 import br.com.ic.repository.CargoRepository;
 
 @Service
-public class CargoService {
+public class IgrejaService {
 
 	@Autowired
 	private CargoRepository cargoRepository;
@@ -23,7 +23,7 @@ public class CargoService {
 	}
 
 	private Cargo buscarPorId(Long id) {
-		Cargo cargoBanco = cargoRepository.findById(id).orElse(null);
+		Cargo cargoBanco = cargoRepository.findById(id).get();
 		if (cargoBanco == null) {
 			throw new EmptyResultDataAccessException(1);
 		}

@@ -1,12 +1,12 @@
 package br.com.ic.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,7 +25,7 @@ import br.com.ic.repository.CargoRepository;
 import br.com.ic.service.CargoService;
 
 @RestController
-@RequestMapping("/cargo")
+@RequestMapping("/cargos")
 public class CargoController {
 
 	@Autowired
@@ -38,8 +38,8 @@ public class CargoController {
 	private CargoService cargoService;
 
 	@GetMapping
-	public List<Cargo> findAll() {
-		return cargoRepository.findAll();
+	public Page<Cargo> pesquisar(String nome, Pageable pageable) {
+		return cargoRepository.findByNomeContains(nome, pageable);
 	}
 
 	@PostMapping
@@ -51,7 +51,7 @@ public class CargoController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findOne(@PathVariable Long id) {
-		Cargo cargo = cargoRepository.findById(id).get();
+		Cargo cargo = cargoRepository.findById(id).orElse(null);
 		return cargo == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(cargo);
 	}
 
@@ -66,8 +66,8 @@ public class CargoController {
 		Cargo cargoBanco = cargoService.atualizar(id, cargo);
 		return ResponseEntity.ok(cargoBanco);
 	}
-	
-	@PutMapping("/{id}")
+
+	@PutMapping("/{id}/ativo")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizarPropriedadeAtivo(@PathVariable Long id, @RequestBody Boolean ativo) {
 		cargoService.atualizarPropriedadeAtivo(id, ativo);
