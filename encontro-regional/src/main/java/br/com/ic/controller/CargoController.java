@@ -39,7 +39,7 @@ public class CargoController {
 
 	@GetMapping
 	public Page<Cargo> pesquisar(String nome, Pageable pageable) {
-		return cargoRepository.findByNomeContains(nome, pageable);
+		return cargoRepository.findByNomeContainsOrderByNomeAsc(nome, pageable);
 	}
 
 	@PostMapping
@@ -51,14 +51,14 @@ public class CargoController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findOne(@PathVariable Long id) {
-		Cargo cargo = cargoRepository.findById(id).orElse(null);
+		Cargo cargo = cargoRepository.findOne(id);
 		return cargo == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(cargo);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		cargoRepository.deleteById(id);
+		cargoRepository.delete(id);
 	}
 
 	@PutMapping("/{id}")

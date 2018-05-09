@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -47,14 +46,12 @@ public class Cargo implements Serializable {
 	@Column(length = 250)
 	@Size(max = 250)
 	private String descricao;
-//
-//	@Type(type = "true_false")
+
 	@Column(nullable = false)
 	@Builder.Default
 	private Boolean ativo = true;
 
 	@Column(nullable = false, name = "data_cadastro")
-	@PastOrPresent
 	@NotNull
 	@Builder.Default
 	private LocalDateTime dataCadastro = LocalDateTime.now();

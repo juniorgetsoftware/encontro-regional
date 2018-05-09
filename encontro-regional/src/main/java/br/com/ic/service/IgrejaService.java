@@ -23,7 +23,7 @@ public class IgrejaService {
 	}
 
 	private Cargo buscarPorId(Long id) {
-		Cargo cargoBanco = cargoRepository.findById(id).get();
+		Cargo cargoBanco = cargoRepository.findOne(id);
 		if (cargoBanco == null) {
 			throw new EmptyResultDataAccessException(1);
 		}

@@ -3,12 +3,11 @@ package br.com.ic.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import br.com.ic.model.Cargo;
 
-@RepositoryRestResource
-public interface CargoRepository extends JpaRepository<Cargo, Long>/*, CargoRepositoryQuery */{
-	
-	public Page<Cargo> findByNomeContains(String nome, Pageable pageable);
+public interface CargoRepository extends JpaRepository<Cargo, Long> {
+
+	public Page<Cargo> findByNomeContainsOrderByNomeAsc(String nome, Pageable pageable);
+
 }

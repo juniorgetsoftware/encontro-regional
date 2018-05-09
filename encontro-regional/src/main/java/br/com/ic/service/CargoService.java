@@ -23,7 +23,7 @@ public class CargoService {
 	}
 
 	private Cargo buscarPorId(Long id) {
-		Cargo cargoBanco = cargoRepository.findById(id).orElse(null);
+		Cargo cargoBanco = cargoRepository.findOne(id);
 		if (cargoBanco == null) {
 			throw new EmptyResultDataAccessException(1);
 		}

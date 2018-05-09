@@ -8,10 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.PastOrPresent;
-
-import org.hibernate.annotations.Type;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,19 +38,19 @@ public class Igreja implements Serializable {
 	private Long id;
 
 	@Column(unique = true, nullable = false, length = 50)
-	@NotBlank
+	@NotNull
 	private String nome;
 
 	@Column(length = 250)
 	private String descricao;
 	
-	@Type(type = "true_false")
+	@Builder.Default
 	@Column(nullable = false)
 	private Boolean ativo = true;
 	
+	@Builder.Default
 	@Column(nullable = false, name = "data_cadastro")
-	@PastOrPresent
-	@NotBlank
+	@NotNull
 	private LocalDateTime dataCadastro = LocalDateTime.now();
 
 }

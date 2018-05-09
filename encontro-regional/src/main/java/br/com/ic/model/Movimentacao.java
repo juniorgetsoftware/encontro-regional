@@ -14,10 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.PastOrPresent;
-
-import org.hibernate.annotations.Type;
+import javax.validation.constraints.NotNull;
 
 import br.com.ic.model.enums.TipoMovimentacao;
 import lombok.AllArgsConstructor;
@@ -44,29 +41,29 @@ public class Movimentacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+	@NotNull
 	@Column(unique = true, nullable = false, length = 50)
 	private String titulo;
 
 	@Column(length = 250)
 	private String observacao;
 
-	@NotBlank
+	@NotNull
 	@Column(nullable = false)
 	@DecimalMin(value = "0.01")
 	private BigDecimal valor;
 
 	@Column(nullable = true, name = "data_pagamento")
-	@NotBlank
+	@NotNull
 	private LocalDate dataPagamento;
 
 	@Column(nullable = false, name = "data_vencimento")
-	@NotBlank
+	@NotNull
 	private LocalDate dataVencimento;
 
+	@Builder.Default
 	@Column(nullable = false, name = "data_cadastro")
-	@PastOrPresent
-	@NotBlank
+	@NotNull
 	private LocalDateTime dataCadastro = LocalDateTime.now();
 
 	@Enumerated(EnumType.STRING)
@@ -76,7 +73,7 @@ public class Movimentacao implements Serializable {
 	@ManyToOne(optional = false)
 	private Categoria categoria;
 
-	@Type(type = "true_false")
+	@Builder.Default
 	@Column(nullable = false)
 	private Boolean ativo = true;
 
